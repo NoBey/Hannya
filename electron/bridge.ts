@@ -9,15 +9,32 @@ export const api = {
    * The function below can accessed using `window.Main.sendMessage`
    */
 
-  sendMessage: (message: string) => {
+  sendMessage: async (message: string) => {
     ipcRenderer.send('message', message)
+    
+
+  },
+
+  async getFile(filePath: any){
+   return  await ipcRenderer.invoke('getFile', filePath)
+  },
+
+  async saveFile(...arg){
+    return  await ipcRenderer.invoke('saveFile', ...arg)
+   },
+
+  async getOpenFilePath(){
+    return  await ipcRenderer.invoke('getOpenFilePath')
+  },
+  async getSaveFilePath(){
+    return  await ipcRenderer.invoke('getSaveFilePath')
   },
 
   /**
    * Provide an easier way to listen to events
    */
   on: (channel: string, callback: Function) => {
-    ipcRenderer.on(channel, (_, data) => callback(data))
+    ipcRenderer.on(channel, (_: any, data: any) => callback(data))
   }
 }
 

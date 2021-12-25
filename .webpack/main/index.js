@@ -822,6 +822,33 @@ try {
 
 /***/ }),
 
+/***/ "./electron/utils.ts":
+/*!***************************!*\
+  !*** ./electron/utils.ts ***!
+  \***************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "readFile": () => (/* binding */ readFile),
+/* harmony export */   "saveFile": () => (/* binding */ saveFile)
+/* harmony export */ });
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! fs */ "fs");
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! path */ "path");
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function readFile(filepath) {
+  return fs__WEBPACK_IMPORTED_MODULE_0___default().readFileSync(path__WEBPACK_IMPORTED_MODULE_1___default().resolve(filepath)).toString();
+}
+function saveFile(filepath, content) {
+  return fs__WEBPACK_IMPORTED_MODULE_0___default().writeFileSync(path__WEBPACK_IMPORTED_MODULE_1___default().resolve(filepath), content);
+}
+
+/***/ }),
+
 /***/ "electron":
 /*!***************************!*\
   !*** external "electron" ***!
@@ -830,6 +857,28 @@ try {
 
 "use strict";
 module.exports = require("electron");
+
+/***/ }),
+
+/***/ "fs":
+/*!*********************!*\
+  !*** external "fs" ***!
+  \*********************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("fs");
+
+/***/ }),
+
+/***/ "path":
+/*!***********************!*\
+  !*** external "path" ***!
+  \***********************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("path");
 
 /***/ })
 
@@ -915,6 +964,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var electron__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! electron */ "electron");
 /* harmony import */ var electron__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(electron__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils */ "./electron/utils.ts");
+
 
 
 
@@ -925,10 +976,15 @@ var mainWindow;
 //     ? process.resourcesPath
 //     : app.getAppPath()
 function createWindow() {
+  electron__WEBPACK_IMPORTED_MODULE_2__.Menu.setApplicationMenu(null);
   mainWindow = new electron__WEBPACK_IMPORTED_MODULE_2__.BrowserWindow({
     // icon: path.join(assetsPath, 'assets', 'icon.png'),
+    titleBarStyle: 'hiddenInset',
+    spellcheck: false,
+    title: 'Hannya',
     width: 1100,
     height: 700,
+    frame: false,
     backgroundColor: '#191622',
     webPreferences: {
       nodeIntegration: false,
@@ -936,6 +992,7 @@ function createWindow() {
       preload: '/Users/zhangjingrui/Hannya/.webpack/renderer/main_window/preload.js'
     }
   });
+  mainWindow.webContents.openDevTools();
   mainWindow.loadURL('http://localhost:3000/main_window');
   mainWindow.on('closed', function () {
     mainWindow = null;
@@ -947,25 +1004,138 @@ function registerListeners() {
 }
 
 function _registerListeners() {
-  _registerListeners = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee() {
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee$(_context) {
+  _registerListeners = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee6() {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee6$(_context6) {
       while (1) {
-        switch (_context.prev = _context.next) {
+        switch (_context6.prev = _context6.next) {
           case 0:
             /**
              * This comes from bridge integration, check bridge.ts
              */
             electron__WEBPACK_IMPORTED_MODULE_2__.ipcMain.on('message', function (_, message) {
               console.log(message);
-              console.log(message);
             });
+            electron__WEBPACK_IMPORTED_MODULE_2__.ipcMain.handle('test', /*#__PURE__*/_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee() {
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee$(_context) {
+                while (1) {
+                  switch (_context.prev = _context.next) {
+                    case 0:
+                      return _context.abrupt("return", (0,_utils__WEBPACK_IMPORTED_MODULE_3__.readFile)());
 
-          case 1:
+                    case 1:
+                    case "end":
+                      return _context.stop();
+                  }
+                }
+              }, _callee);
+            })));
+            electron__WEBPACK_IMPORTED_MODULE_2__.ipcMain.handle('getFile', /*#__PURE__*/function () {
+              var _ref2 = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee2(ctx, filePath) {
+                return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee2$(_context2) {
+                  while (1) {
+                    switch (_context2.prev = _context2.next) {
+                      case 0:
+                        return _context2.abrupt("return", (0,_utils__WEBPACK_IMPORTED_MODULE_3__.readFile)(filePath));
+
+                      case 1:
+                      case "end":
+                        return _context2.stop();
+                    }
+                  }
+                }, _callee2);
+              }));
+
+              return function (_x, _x2) {
+                return _ref2.apply(this, arguments);
+              };
+            }());
+            electron__WEBPACK_IMPORTED_MODULE_2__.ipcMain.handle('saveFile', /*#__PURE__*/function () {
+              var _ref3 = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee3(ctx) {
+                var _len,
+                    args,
+                    _key,
+                    _args3 = arguments;
+
+                return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee3$(_context3) {
+                  while (1) {
+                    switch (_context3.prev = _context3.next) {
+                      case 0:
+                        for (_len = _args3.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+                          args[_key - 1] = _args3[_key];
+                        }
+
+                        return _context3.abrupt("return", _utils__WEBPACK_IMPORTED_MODULE_3__.saveFile.apply(void 0, args));
+
+                      case 2:
+                      case "end":
+                        return _context3.stop();
+                    }
+                  }
+                }, _callee3);
+              }));
+
+              return function (_x3) {
+                return _ref3.apply(this, arguments);
+              };
+            }());
+            electron__WEBPACK_IMPORTED_MODULE_2__.ipcMain.handle('getOpenFilePath', /*#__PURE__*/_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee4() {
+              var _yield$dialog$showOpe, canceled, filePaths;
+
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee4$(_context4) {
+                while (1) {
+                  switch (_context4.prev = _context4.next) {
+                    case 0:
+                      _context4.next = 2;
+                      return electron__WEBPACK_IMPORTED_MODULE_2__.dialog.showOpenDialog({
+                        properties: ['openFile']
+                      });
+
+                    case 2:
+                      _yield$dialog$showOpe = _context4.sent;
+                      canceled = _yield$dialog$showOpe.canceled;
+                      filePaths = _yield$dialog$showOpe.filePaths;
+                      return _context4.abrupt("return", {
+                        canceled: canceled,
+                        filePath: filePaths[0]
+                      });
+
+                    case 6:
+                    case "end":
+                      return _context4.stop();
+                  }
+                }
+              }, _callee4);
+            })));
+            electron__WEBPACK_IMPORTED_MODULE_2__.ipcMain.handle('getSaveFilePath', /*#__PURE__*/_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee5() {
+              var data;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee5$(_context5) {
+                while (1) {
+                  switch (_context5.prev = _context5.next) {
+                    case 0:
+                      _context5.next = 2;
+                      return electron__WEBPACK_IMPORTED_MODULE_2__.dialog.showSaveDialog({
+                        defaultPath: "未命名.md",
+                        properties: ['createDirectory']
+                      });
+
+                    case 2:
+                      data = _context5.sent;
+                      return _context5.abrupt("return", data);
+
+                    case 4:
+                    case "end":
+                      return _context5.stop();
+                  }
+                }
+              }, _callee5);
+            })));
+
+          case 6:
           case "end":
-            return _context.stop();
+            return _context6.stop();
         }
       }
-    }, _callee);
+    }, _callee6);
   }));
   return _registerListeners.apply(this, arguments);
 }

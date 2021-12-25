@@ -15,9 +15,14 @@
   "keywords": [],
   "license": "MIT",
   "dependencies": {
+    "@types/electron": "^1.6.10",
+    "css-loader": "^6.5.1",
+    "less": "^4.1.2",
+    "less-loader": "^10.2.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-hot-loader": "4.13.0",
+    "style-loader": "^3.3.1",
     "styled-components": "5.3.0"
   },
   "devDependencies": {
@@ -63,10 +68,11 @@
     "wait-on": "5.3.0"
   },
   "config": {
+    "name": "Hannya",
+    "version": "1.0.0",
     "forge": {
       "packagerConfig": {
         "name": "Hannya",
-        "executableName": "Hannya",
         "icon": "assets/icon",
         "extraResource": [
           "assets"
