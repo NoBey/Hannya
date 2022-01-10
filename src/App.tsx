@@ -5,7 +5,7 @@ import { CatalogTree } from './components/CatalogTree'
 import './index.less'
 import { useEffect, useState, KeyboardEvent } from 'react'
 import { NavBar } from './components/NavBar'
-
+import { App as Core } from '@noedit/core'
 
 const Main = window.Main
 
@@ -54,10 +54,11 @@ function Edit() {
       <button onClick={openFile}>open</button>
       <button onClick={saveFile}>save</button>
       <span>{filePath || '未命名'}{isEdit ? "-已编辑" : ""}</span>
-      <textarea value={text} onChange={e => {
+      <Core />
+      {/* <textarea value={text} onChange={e => {
         setText(e.target.value)
         setIsEdit(true)
-      } } />
+      } } /> */}
     </div>
   )
 }

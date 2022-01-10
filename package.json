@@ -15,6 +15,7 @@
   "keywords": [],
   "license": "MIT",
   "dependencies": {
+    "@noedit/core": "^0.0.7",
     "@types/electron": "^1.6.10",
     "css-loader": "^6.5.1",
     "less": "^4.1.2",
